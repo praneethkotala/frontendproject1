@@ -22,7 +22,7 @@ export const ProfileView = ({
       <div className="profile-avatar-column">
         <div className="profile-photo-wrapper">
           <img
-            src={APP_ASSETS.USER_AVATAR}
+            src={profile?.avatar_url || APP_ASSETS.USER_AVATAR}
             alt={name}
             className="profile-photo-img"
             onError={(e) => {
@@ -41,7 +41,7 @@ export const ProfileView = ({
         <ProfileField label="Your Name" value={name} />
         <ProfileField label="User Name" value={userName} />
         <ProfileField label="Email" value={email} />
-        <ProfileField label="Password" value="password123" isMasked />
+        <ProfileField label="Password" isMasked />
         <ProfileField label="Date of Birth" value={dob} />
         <ProfileField label="Present Address" value={presentAddress} />
         <ProfileField label="Permanent Address" value={permanentAddress} />

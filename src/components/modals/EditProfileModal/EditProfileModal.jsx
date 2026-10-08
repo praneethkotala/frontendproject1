@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import { X, Loader2 } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { ImagePlus, Loader2, Trash2, X } from 'lucide-react'
+import { APP_ASSETS } from '../../../constants/AppConstants'
 import './EditProfileModal.css'
+
+const maxProfilePhotoSize = 1024 * 1024
+const allowedProfilePhotoTypes = new Set(['image/jpeg', 'image/png', 'image/webp'])
 
 export const EditProfileModal = ({
   profile,
   onClose,
   onSave,
 }) => {
-  const [name, setName] = useState(profile?.name || '')
+  const [name, setName] = useState(profile?.name || profile?.username || '')
   const [email, setEmail] = useState(profile?.email || '')
   const [dob, setDob] = useState(profile?.date_of_birth || '')
   const [presentAddress, setPresentAddress] = useState(profile?.present_address || '')
@@ -15,14 +19,50 @@ export const EditProfileModal = ({
   const [city, setCity] = useState(profile?.city || '')
   const [postalCode, setPostalCode] = useState(profile?.postal_code || '')
   const [country, setCountry] = useState(profile?.country || '')
+  const [avatarUrl, setAvatarUrl] = useState(profile?.avatar_url || '')
+  const [errorMessage, setErrorMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const photoInputRef = useRef(null)
+
+  const handlePhotoSelection = (event) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    setErrorMessage('')
+
+    if (!file) {
+      return
+    }
+    if (!allowedProfilePhotoTypes.has(file.type)) {
+      setErrorMessage('Choose a JPEG, PNG, or WebP image.')
+      return
+    }
+    if (file.size > maxProfilePhotoSize) {
+      setErrorMessage('Choose an image smaller than 1 MB.')
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        setAvatarUrl(reader.result)
+      } else {
+        setErrorMessage('Could not read this image. Please choose another file.')
+      }
+    }
+    reader.onerror = () => {
+      setErrorMessage('Could not read this image. Please choose another file.')
+    }
+    reader.readAsDataURL(file)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setErrorMessage('')
     setIsSubmitting(true)
     try {
       await onSave({
         ...profile,
+        avatar_url: avatarUrl,
         name,
         email,
         date_of_birth: dob,
@@ -34,7 +74,7 @@ export const EditProfileModal = ({
       })
       onClose()
     } catch (err) {
-      console.error(err)
+      setErrorMessage(err.message || 'Could not save profile changes.')
     } finally {
       setIsSubmitting(false)
     }
@@ -59,6 +99,51 @@ export const EditProfileModal = ({
         </div>
 
         <form onSubmit={handleSubmit} className="modal-form">
+          {errorMessage && (
+            <div className="modal-error-banner" role="alert">
+              {errorMessage}
+            </div>
+          )}
+
+          <div className="edit-profile-photo-section">
+            <img
+              src={avatarUrl || profile?.avatar_url || APP_ASSETS.USER_AVATAR}
+              alt="Profile preview"
+              className="edit-profile-photo-preview"
+            />
+            <div className="edit-profile-photo-actions">
+              <input
+                ref={photoInputRef}
+                id="edit-profile-photo"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                className="edit-profile-photo-input"
+                onChange={handlePhotoSelection}
+              />
+              <button
+                type="button"
+                className="edit-profile-photo-button"
+                onClick={() => photoInputRef.current?.click()}
+                disabled={isSubmitting}
+              >
+                <ImagePlus size={16} />
+                <span>Change photo</span>
+              </button>
+              {avatarUrl && (
+                <button
+                  type="button"
+                  className="edit-profile-photo-button edit-profile-photo-remove"
+                  onClick={() => setAvatarUrl('')}
+                  disabled={isSubmitting}
+                >
+                  <Trash2 size={16} />
+                  <span>Remove photo</span>
+                </button>
+              )}
+              <span className="edit-profile-photo-hint">JPEG, PNG, or WebP. Maximum 1 MB.</span>
+            </div>
+          </div>
+
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="edit-profile-name" className="form-label">Your Name</label>

@@ -66,7 +66,7 @@ export const Sidebar = ({
         <div className="sidebar-user-pill">
           <div className="user-avatar-container">
             <img
-              src={APP_ASSETS.USER_AVATAR}
+              src={userProfile?.avatar_url || APP_ASSETS.USER_AVATAR}
               alt={displayName}
               className="user-avatar"
               onError={(e) => {

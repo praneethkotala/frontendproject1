@@ -81,7 +81,7 @@ export const MobileNavbar = ({
           <div className="mobile-user-profile-section">
             <div className="mobile-user-info">
               <img
-                src={APP_ASSETS.USER_AVATAR}
+                src={userProfile?.avatar_url || APP_ASSETS.USER_AVATAR}
                 alt={displayName}
                 className="mobile-user-avatar"
                 onError={(e) => {

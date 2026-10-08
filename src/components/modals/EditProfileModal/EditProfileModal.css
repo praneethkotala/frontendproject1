@@ -2,4 +2,84 @@
 
 .edit-profile-modal-container {
   max-width: 580px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+
+.edit-profile-photo-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.edit-profile-photo-preview {
+  width: 88px;
+  height: 88px;
+  flex: 0 0 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-card);
+  border: 3px solid var(--primary-light);
+}
+
+.edit-profile-photo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-profile-photo-input {
+  display: none;
+}
+
+.edit-profile-photo-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.edit-profile-photo-button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.edit-profile-photo-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.edit-profile-photo-remove:hover {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.edit-profile-photo-hint {
+  width: 100%;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+  .edit-profile-photo-section {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .edit-profile-photo-preview {
+    width: 68px;
+    height: 68px;
+    flex-basis: 68px;
+  }
 }

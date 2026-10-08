@@ -43,7 +43,9 @@ The project includes:
 
 ## 7. Features
 ### Authentication
-- Login with user credentials
+- Sign in with the email address and password assigned to the user's account.
+- The account password is separate from the Hasura admin secret; the admin secret must never be entered in the sign-in form.
+- Production account passwords are managed by the authentication backend. A fixed local demo account is available only on localhost during non-production development.
 - Admin and standard user roles
 - Session persistence using cookies
 - Protected routes
@@ -87,7 +89,8 @@ The project is organized into multiple folders for separation of concerns, inclu
 ## 9. User Profile and Backend Security
 - Standard User username: `praneeth07`
 - Standard User email: `kotalapraneeth07@gmail.com`
-- Passwords and backend secrets are not stored in the repository.
+- Production account passwords are managed by the authentication backend. Local demo credentials are documented in the README and cannot be used in production.
+- Store the Hasura admin secret only in the server-side environment, such as `.env.local`; never use it as an account password or expose it in browser code.
 - Configure Hasura access through trusted server-side authentication or JWT role authorization; do not expose an admin secret in browser code.
 
 ## 10. Setup Instructions

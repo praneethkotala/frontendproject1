@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { getCurrentUser, loginUser, logoutUser } from '../services/authService'
 import { fetchProfileDetails } from '../services/profileService'
+import { getStoredProfilePhoto } from '../services/profilePhotoStorage'
 import { USER_ROLES } from '../constants/AppConstants'
 
 const AuthContext = createContext(null)
@@ -22,12 +23,15 @@ export const AuthProvider = ({ children }) => {
         userId: user.id,
       })
 
-      if (user.role === USER_ROLES.ADMIN && Array.isArray(profileData)) {
-        const found = profileData.find((u) => u.id === user.id) || profileData[0]
-        setUserProfile(found)
-      } else {
-        setUserProfile(profileData)
-      }
+      const profile = user.role === USER_ROLES.ADMIN && Array.isArray(profileData)
+        ? profileData.find((item) => item.id === user.id) || profileData[0]
+        : profileData
+      const savedPhoto = getStoredProfilePhoto(user.email)
+      setUserProfile(
+        profile
+          ? { ...profile, avatar_url: savedPhoto || profile.avatar_url }
+          : profile,
+      )
     } catch (error) {
       console.error('Failed to load user profile in AuthContext:', error)
     }

@@ -59,16 +59,16 @@ The configured Standard User profile uses username `praneeth07` and email `kotal
 npm install
 ```
 
-### 2. Configure the backend secret
+### 2. Configure the backend
 
-Use Node.js 20.19 or newer. In PowerShell, copy `.env.example` to `.env.local`, then edit `.env.local` and replace `HASURA_ADMIN_SECRET` with a newly rotated Hasura admin secret:
+Use Node.js 20.19 or newer. For local development, no Hasura secret is needed: `npm run dev` enables a local-only demo account and uses in-memory sample transactions. Sign in with:
 
-```powershell
-Copy-Item .env.example .env.local
-notepad .env.local
-```
+- Email: `kotalapraneeth07@gmail.com`
+- Password: `password123`
 
-Revoke any secret that was previously placed in frontend code. Keep the replacement server-side: do not use a `VITE_` prefix or commit `.env.local`. Optionally set `ADMIN_EMAILS` to a comma-separated allowlist of administrator email addresses.
+Demo transactions reset whenever the backend restarts. The demo login is available only when the server is not in production and binds to localhost; it is disabled in production.
+
+For real Hasura accounts and data, configure `HASURA_ADMIN_SECRET`, `HASURA_API_BASE_URL`, and optionally `ADMIN_EMAILS` in `.env.local`. Use a valid, newly rotated Hasura admin secret; it is not a sign-in password. Keep it server-side, never use a `VITE_` prefix or commit `.env.local`. Check backend status at `http://127.0.0.1:4177/api/health`; `hasuraConfigured` reports Hasura configuration and `demoAuthEnabled` reports local demo availability.
 
 ### 3. Run Development Server
 ```bash
@@ -78,7 +78,9 @@ The application and its local backend will be available at `http://127.0.0.1:517
 
 ### Backend authentication
 
-The Node backend stores Hasura credentials, verifies sign-in, issues an HttpOnly session cookie, and derives the Hasura role from the server-side administrator allowlist. Authenticated API routes are allowlisted. Never put an admin secret in frontend source or a `VITE_` environment variable, because browser bundles expose it.
+The Node backend issues an HttpOnly session cookie. Local demo sessions use in-memory sample data; other sessions are verified against Hasura, with the role derived from the server-side administrator allowlist. Authenticated API routes are allowlisted. Never put an admin secret in frontend source or a `VITE_` environment variable, because browser bundles expose it.
+
+Profile photos can be changed from **Profile → Edit Profile**. Local photo changes are stored in that browser's local storage and do not upload to Hasura.
 
 ### 4. Build and run for production
 ```bash

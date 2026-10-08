@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { saveProfilePhoto } from '../../services/profilePhotoStorage'
 import { Header } from '../../components/common/Header/Header'
 import { ProfileView } from '../../components/profile/ProfileView/ProfileView'
 import { EditProfileModal } from '../../components/modals/EditProfileModal/EditProfileModal'
@@ -18,6 +19,7 @@ export const ProfilePage = () => {
   }
 
   const handleSaveProfile = (updatedProfile) => {
+    saveProfilePhoto(authUser.email, updatedProfile.avatar_url)
     setUserProfile(updatedProfile)
   }
 
