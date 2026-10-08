@@ -4,6 +4,7 @@ import './LogoutConfirmationModal.css'
 export const LogoutConfirmationModal = ({
   onClose,
   onConfirm,
+  errorMessage,
 }) => {
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
@@ -29,6 +30,12 @@ export const LogoutConfirmationModal = ({
             <X size={20} />
           </button>
         </div>
+
+        {errorMessage && (
+          <p className="logout-error-message" role="alert">
+            {errorMessage}
+          </p>
+        )}
 
         <div className="modal-actions logout-modal-actions">
           <button

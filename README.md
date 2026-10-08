@@ -59,20 +59,33 @@ The configured Standard User profile uses username `praneeth07` and email `kotal
 npm install
 ```
 
-### 2. Run Development Server
+### 2. Configure the backend secret
+
+Use Node.js 20.19 or newer. In PowerShell, copy `.env.example` to `.env.local`, then edit `.env.local` and replace `HASURA_ADMIN_SECRET` with a newly rotated Hasura admin secret:
+
+```powershell
+Copy-Item .env.example .env.local
+notepad .env.local
+```
+
+Revoke any secret that was previously placed in frontend code. Keep the replacement server-side: do not use a `VITE_` prefix or commit `.env.local`. Optionally set `ADMIN_EMAILS` to a comma-separated allowlist of administrator email addresses.
+
+### 3. Run Development Server
 ```bash
 npm run dev
 ```
-The application will be live at `http://localhost:5173/`.
+The application and its local backend will be available at `http://127.0.0.1:5173/`.
 
 ### Backend authentication
 
-The frontend does not contain a Hasura admin secret. Configure Hasura authentication through a trusted server-side API or JWT-based role authorization before using the live API. Never put an admin secret in frontend source or a `VITE_` environment variable, because browser bundles expose it.
+The Node backend stores Hasura credentials, verifies sign-in, issues an HttpOnly session cookie, and derives the Hasura role from the server-side administrator allowlist. Authenticated API routes are allowlisted. Never put an admin secret in frontend source or a `VITE_` environment variable, because browser bundles expose it.
 
-### 3. Build for Production
+### 4. Build and run for production
 ```bash
 npm run build
+npm start
 ```
+Configure `HASURA_ADMIN_SECRET`, `HASURA_API_BASE_URL`, `ADMIN_EMAILS`, and `PORT` in the production host's server-side environment.
 
 ---
 

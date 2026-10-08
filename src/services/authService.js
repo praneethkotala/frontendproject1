@@ -1,63 +1,38 @@
-import Cookies from 'js-cookie'
-import { sendApiRequest } from './apiClient'
-import { USER_ROLES, STORAGE_KEYS } from '../constants/AppConstants'
-
-export const loginUser = async ({ email, password }) => {
-  const result = await sendApiRequest({
-    endpoint: '/get-user-id',
-    method: 'POST',
-    body: { email, password },
-    role: USER_ROLES.ADMIN,
+const sendAuthRequest = async ({ endpoint, method = 'GET', body = null }) => {
+  const response = await fetch(endpoint, {
+    method,
+    headers: {
+      'content-type': 'application/json',
+    },
+    credentials: 'same-origin',
+    ...(body === null ? {} : { body: JSON.stringify(body) }),
   })
 
-  const usersList = result?.get_user_id || []
-  if (usersList.length === 0) {
-    throw new Error('Invalid email or password. Please try again.')
+  const data = await response.json()
+  if (!response.ok) {
+    throw new Error(data?.error || `Authentication request failed (${response.status}).`)
   }
 
-  const userId = usersList[0].id
-  const isAdminEmail = email.toLowerCase().includes('admin')
-  const assignedRole = isAdminEmail ? USER_ROLES.ADMIN : USER_ROLES.USER
-
-  const authUser = {
-    id: userId,
-    email,
-    role: assignedRole,
-  }
-
-  setStoredUser({ user: authUser })
-  return authUser
+  return data
 }
 
-export const getStoredUser = () => {
-  const cookieValue = Cookies.get(STORAGE_KEYS.AUTH_USER)
-  if (cookieValue) {
-    try {
-      return JSON.parse(cookieValue)
-    } catch {
-      return null
-    }
-  }
-
-  const localValue = localStorage.getItem(STORAGE_KEYS.AUTH_USER)
-  if (localValue) {
-    try {
-      return JSON.parse(localValue)
-    } catch {
-      return null
-    }
-  }
-
-  return null
+export const loginUser = async ({ email, password }) => {
+  const { user } = await sendAuthRequest({
+    endpoint: '/api/auth/login',
+    method: 'POST',
+    body: { email, password },
+  })
+  return user
 }
 
-export const setStoredUser = ({ user }) => {
-  const serialized = JSON.stringify(user)
-  Cookies.set(STORAGE_KEYS.AUTH_USER, serialized, { expires: 7 })
-  localStorage.setItem(STORAGE_KEYS.AUTH_USER, serialized)
+export const getCurrentUser = async () => {
+  const { user } = await sendAuthRequest({ endpoint: '/api/auth/session' })
+  return user
 }
 
-export const removeStoredUser = () => {
-  Cookies.remove(STORAGE_KEYS.AUTH_USER)
-  localStorage.removeItem(STORAGE_KEYS.AUTH_USER)
+export const logoutUser = async () => {
+  await sendAuthRequest({
+    endpoint: '/api/auth/logout',
+    method: 'POST',
+  })
 }

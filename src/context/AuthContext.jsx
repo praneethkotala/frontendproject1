@@ -1,12 +1,12 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
-import { getStoredUser, loginUser, removeStoredUser } from '../services/authService'
+import { getCurrentUser, loginUser, logoutUser } from '../services/authService'
 import { fetchProfileDetails } from '../services/profileService'
 import { USER_ROLES } from '../constants/AppConstants'
 
 const AuthContext = createContext(null)
 
 export const AuthProvider = ({ children }) => {
-  const [authUser, setAuthUser] = useState(() => getStoredUser())
+  const [authUser, setAuthUser] = useState(null)
   const [userProfile, setUserProfile] = useState(null)
   const [authLoading, setAuthLoading] = useState(true)
 
@@ -34,16 +34,29 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   useEffect(() => {
+    let isMounted = true
+
     const initializeAuth = async () => {
-      const stored = getStoredUser()
-      if (stored) {
-        setAuthUser(stored)
-        await loadProfile(stored)
+      try {
+        const user = await getCurrentUser()
+        if (isMounted && user) {
+          setAuthUser(user)
+          await loadProfile(user)
+        }
+      } catch (error) {
+        console.error('Failed to restore the server session:', error)
+      } finally {
+        if (isMounted) {
+          setAuthLoading(false)
+        }
       }
-      setAuthLoading(false)
     }
 
     initializeAuth()
+
+    return () => {
+      isMounted = false
+    }
   }, [loadProfile])
 
   const handleLogin = async ({ email, password }) => {
@@ -53,8 +66,8 @@ export const AuthProvider = ({ children }) => {
     return user
   }
 
-  const handleLogout = () => {
-    removeStoredUser()
+  const handleLogout = async () => {
+    await logoutUser()
     setAuthUser(null)
     setUserProfile(null)
   }

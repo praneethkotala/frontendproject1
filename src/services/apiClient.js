@@ -1,20 +1,16 @@
-import { API_BASE_URL, USER_ROLES } from '../constants/AppConstants'
+import { API_BASE_URL } from '../constants/AppConstants'
 
-export const sendApiRequest = async ({ endpoint, method = 'GET', body = null, role = USER_ROLES.USER, userId = null }) => {
+export const sendApiRequest = async ({ endpoint, method = 'GET', body = null }) => {
   const url = `${API_BASE_URL}${endpoint}`
 
   const headers = {
     'content-type': 'application/json',
-    'x-hasura-role': role,
-  }
-
-  if (role === USER_ROLES.USER && userId !== null) {
-    headers['x-hasura-user-id'] = String(userId)
   }
 
   const options = {
     method,
     headers,
+    credentials: 'same-origin',
   }
 
   if (body !== null && (method === 'POST' || method === 'PUT' || method === 'DELETE')) {

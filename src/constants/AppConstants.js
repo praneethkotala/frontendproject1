@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://bursting-gelding-24.hasura.app/api/rest'
+export const API_BASE_URL = '/api/rest'
 
 export const API_STATUS = {
   INITIAL: 'INITIAL',
@@ -51,11 +51,6 @@ export const PAGINATION = {
 export const VALIDATION_LIMITS = {
   TRANSACTION_NAME_MAX_LENGTH: 30,
   MINIMUM_AMOUNT: 0.01,
-}
-
-export const STORAGE_KEYS = {
-  AUTH_USER: 'money_matters_auth_user',
-  ACCESS_TOKEN: 'money_matters_token',
 }
 
 export const APP_ASSETS = {

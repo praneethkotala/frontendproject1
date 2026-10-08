@@ -4,6 +4,14 @@
   max-width: 480px;
 }
 
+.logout-error-message {
+  margin: 0 28px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #b91c1c;
+  background-color: #fee2e2;
+}
+
 .logout-modal-icon-header {
   display: flex;
   align-items: flex-start;
