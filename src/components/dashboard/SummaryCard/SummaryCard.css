@@ -1,0 +1,77 @@
+.summary-card {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.summary-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-card-amount {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.summary-card-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.credit-text {
+  color: var(--success-dark);
+}
+
+.debit-text {
+  color: var(--danger-color);
+}
+
+.summary-card-icon-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.credit-icon-bg {
+  background-color: var(--success-light);
+  color: var(--success-dark);
+}
+
+.debit-icon-bg {
+  background-color: var(--danger-light);
+  color: var(--danger-color);
+}
+
+@media (max-width: 640px) {
+  .summary-card {
+    padding: 18px 20px;
+  }
+
+  .summary-card-amount {
+    font-size: 22px;
+  }
+
+  .summary-card-icon-container {
+    width: 44px;
+    height: 44px;
+  }
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Matters - Project Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      color: #1f2937;
+      line-height: 1.7;
+      background: #f9fafb;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    h1, h2, h3 {
+      color: #111827;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    @media print {
+      body { background: white; margin: 0; }
+      .container { box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Money Matters - Project Report</h1>
+
+    <h2>1. Project Title</h2>
+    <p>Money Matters - Frontend Financial Dashboard</p>
+
+    <h2>2. Introduction</h2>
+    <p>This project is a responsive personal finance and accounting web application developed using React, HTML, and CSS. It allows users to manage their personal financial transactions, monitor inflow and outflow of money, and keep track of their financial status through a dashboard interface. The application also includes role-based authentication, user profile management, and transaction operations.</p>
+
+    <h2>3. Objective</h2>
+    <ul>
+      <li>Track daily transactions</li>
+      <li>View total credit and debit summaries</li>
+      <li>Analyze weekly financial trends</li>
+      <li>Add, edit, and delete transactions</li>
+      <li>Manage a user profile</li>
+      <li>Access the application through secure login protection</li>
+    </ul>
+
+    <h2>4. Problem Statement</h2>
+    <p>Managing personal finance manually is often time-consuming and error-prone. Users require an application that provides a clear summary of their financial state and allows them to quickly update and track transactions without dealing with complex paperwork or spreadsheets.</p>
+
+    <h2>5. Scope of the Project</h2>
+    <ul>
+      <li>User authentication</li>
+      <li>Protected routing</li>
+      <li>Dashboard summaries</li>
+      <li>Recent transactions table</li>
+      <li>Credit and debit filtering</li>
+      <li>Financial chart visualization</li>
+      <li>Add, update, and delete transaction management</li>
+      <li>Responsive frontend design</li>
+    </ul>
+
+    <h2>6. Technology Stack</h2>
+    <ul>
+      <li>React.js</li>
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>Vite</li>
+      <li>React Router DOM</li>
+      <li>Recharts</li>
+      <li>Lucide React</li>
+      <li>Date-fns</li>
+      <li>JS-Cookie</li>
+      <li>Hasura Cloud REST APIs</li>
+    </ul>
+
+    <h2>7. Features</h2>
+    <h3>Authentication</h3>
+    <ul>
+      <li>Login with user credentials</li>
+      <li>Admin and standard user roles</li>
+      <li>Session persistence using cookies</li>
+      <li>Protected routes</li>
+    </ul>
+
+    <h3>Dashboard</h3>
+    <ul>
+      <li>Total credit summary card</li>
+      <li>Total debit summary card</li>
+      <li>Recent transactions section</li>
+      <li>Weekly transaction chart</li>
+    </ul>
+
+    <h3>Transactions</h3>
+    <ul>
+      <li>View all transactions</li>
+      <li>Filter credit/debit transactions</li>
+      <li>Add new transaction</li>
+      <li>Edit transaction details</li>
+      <li>Delete transaction with confirmation</li>
+      <li>Pagination control</li>
+    </ul>
+
+    <h3>Profile</h3>
+    <ul>
+      <li>User profile display</li>
+      <li>Edit profile information</li>
+      <li>Role label and user information display</li>
+    </ul>
+
+    <h3>UI/UX</h3>
+    <ul>
+      <li>Responsive layout</li>
+      <li>Clean and modern interface</li>
+      <li>Modular component design</li>
+      <li>Loading, success, and error states</li>
+    </ul>
+
+    <h2>8. Project Structure</h2>
+    <p>The project is organized into multiple folders for separation of concerns, including:</p>
+    <ul>
+      <li>src/pages</li>
+      <li>src/components</li>
+      <li>src/context</li>
+      <li>src/services</li>
+      <li>src/routes</li>
+      <li>src/layout</li>
+      <li>src/assets</li>
+      <li>src/constants</li>
+    </ul>
+
+    <h2>9. User Profile and Backend Security</h2>
+    <ul>
+      <li>Standard User username: praneeth07</li>
+      <li>Standard User email: kotalapraneeth07@gmail.com</li>
+      <li>Passwords and backend secrets are not stored in the repository.</li>
+      <li>Configure Hasura access through trusted server-side authentication or JWT role authorization; do not expose an admin secret in browser code.</li>
+    </ul>
+
+    <h2>10. Setup Instructions</h2>
+    <p>To run the project locally:</p>
+    <pre><code>cd "C:\Users\HP\OneDrive\Desktop\frontendProject"
+npm install
+npm run dev -- --host 0.0.0.0</code></pre>
+    <p>Then open:</p>
+    <pre><code>http://localhost:5173/</code></pre>
+
+    <h2>11. Production Build</h2>
+    <pre><code>npm run build</code></pre>
+
+    <h2>12. Conclusion</h2>
+    <p>Money Matters is a complete frontend financial management system focused on usability, responsiveness, and real-time transaction tracking. It demonstrates modern React-based frontend development with a clean dashboard, secure authentication flow, and efficient transaction management features.</p>
+    <p>This project provides a practical solution for users who want to monitor and manage their personal finances in a simple and effective manner.</p>
+  </div>
+</body>
+</html>

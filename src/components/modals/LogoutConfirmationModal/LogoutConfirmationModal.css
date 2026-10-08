@@ -1,0 +1,27 @@
+@import '../AddTransactionModal/AddTransactionModal.css';
+
+.logout-modal-container {
+  max-width: 480px;
+}
+
+.logout-modal-icon-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.logout-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logout-modal-actions {
+  padding: 20px 28px 24px;
+}

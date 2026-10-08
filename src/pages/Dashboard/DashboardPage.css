@@ -1,0 +1,37 @@
+.dashboard-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.dashboard-content-body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.dashboard-summary-cards-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.dashboard-recent-transactions-section,
+.dashboard-chart-section {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .dashboard-content-body {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .dashboard-summary-cards-section {
+    grid-template-columns: 1fr;
+  }
+}

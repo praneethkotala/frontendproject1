@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #2d60ff;
+  --primary-hover: #1e4fd9;
+  --primary-light: #e7edff;
+  --success-color: #16dbaa;
+  --success-dark: #0fa47f;
+  --success-light: #e8f8f5;
+  --danger-color: #fe5c73;
+  --danger-hover: #e04158;
+  --danger-light: #fff0f2;
+  --warning-color: #fcaa0b;
+  --warning-light: #fff8e8;
+
+  --bg-main: #f5f7fa;
+  --bg-card: #ffffff;
+  --border-color: #e6eff5;
+  --border-light: #f3f4f6;
+
+  --text-primary: #343c6a;
+  --text-secondary: #718ebf;
+  --text-muted: #8ba3cb;
+  --text-white: #ffffff;
+
+  --sidebar-width: 250px;
+  --header-height: 84px;
+
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all var(--transition-fast);
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5d4ea;
+  border-radius: var(--border-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ab4db;
+}

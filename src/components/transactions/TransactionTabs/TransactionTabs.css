@@ -1,0 +1,56 @@
+.transaction-tabs-bar {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 32px;
+}
+
+.transaction-tabs-list {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+}
+
+.transaction-tab-btn {
+  padding: 16px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.transaction-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.transaction-tab-btn.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.transaction-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .transaction-tabs-bar {
+    padding: 0 16px;
+  }
+
+  .transaction-tabs-list {
+    gap: 20px;
+  }
+
+  .transaction-tab-btn {
+    font-size: 13px;
+    padding: 14px 0;
+  }
+}

@@ -1,0 +1,5 @@
+@import '../AddTransactionModal/AddTransactionModal.css';
+
+.edit-profile-modal-container {
+  max-width: 580px;
+}

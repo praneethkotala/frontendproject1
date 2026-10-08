@@ -1,0 +1,25 @@
+.transactions-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.transactions-content-body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.transactions-table-section {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .transactions-content-body {
+    padding: 16px;
+  }
+}

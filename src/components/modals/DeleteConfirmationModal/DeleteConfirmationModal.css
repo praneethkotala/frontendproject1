@@ -1,0 +1,51 @@
+@import '../AddTransactionModal/AddTransactionModal.css';
+
+.delete-modal-container {
+  max-width: 480px;
+}
+
+.delete-modal-icon-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.warning-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #fee2e2;
+  color: var(--danger-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.delete-modal-actions {
+  padding: 20px 28px 24px;
+}
+
+.danger-action-button {
+  padding: 11px 22px;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--danger-color);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(254, 92, 115, 0.25);
+  transition: all var(--transition-fast);
+}
+
+.danger-action-button:hover:not(:disabled) {
+  background-color: var(--danger-hover);
+  transform: translateY(-1px);
+}
+
+.danger-action-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
